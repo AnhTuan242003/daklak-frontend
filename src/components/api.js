@@ -146,6 +146,24 @@ export const invalidateImagesCache = async (ethnic) => {
     console.warn('invalidateImagesCache error:', err);
   }
 };
+// =================================================
+// ADMIN USERS API
+// =================================================
+
+export const adminCreateManager = async (payload) =>
+  (await api.post('/api/admin/users', payload)).data;
+
+export const adminUpdateManager = async (id, payload) =>
+  (await api.put(`/api/admin/users/${id}`, payload)).data;
+
+export const adminDeleteUser = async (id) =>
+  await api.delete(`/api/admin/users/${id}`);
+
+export const adminListUsers = async ({ page = 0, size = 10, q = '' } = {}) =>
+  (await api.get('/api/admin/users', { params: { page, size, q } })).data;
+
+export const adminGetUser = async (id) =>
+  (await api.get(`/api/admin/users/${id}`)).data;
 
 // =================================================
 // EXPORT DEFAULT — MUST BE LAST
