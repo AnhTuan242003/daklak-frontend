@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getNews } from './api';
+import { fetchPosts as getNews } from './api'; 
 import postsCache from './utils/postsIndexedDB';
 
 const PostsSection = () => {
