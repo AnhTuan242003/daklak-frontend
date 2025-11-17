@@ -134,3 +134,20 @@ export const getHome = async (language = 'vi') => {
   });
   return res.data; // expected: { id, title, content, ... }
 };
+// Images cache invalidation
+export const invalidateImagesCache = async (ethnic) => {
+  try {
+    const keyPrefix = `images_${ethnic || ''}`;
+    // Remove all matching localStorage keys
+    Object.keys(localStorage)
+      .filter(k => k.startsWith(keyPrefix))
+      .forEach(k => localStorage.removeItem(k));
+
+    // If your project uses IndexedDB for caching (imagesCache)
+    if (window.imagesCache?.clearByEthnic) {
+      await window.imagesCache.clearByEthnic(ethnic);
+    }
+  } catch (err) {
+    console.warn('Failed to invalidate image cache:', err);
+  }
+};
