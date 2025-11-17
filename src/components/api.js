@@ -127,3 +127,10 @@ export const getNews = async (language = 'vi') => {
   const res = await api.get('/api/posts', { params: { page: 0, size: 4, language } });
   return res.data;
 };
+// Home API - fetch homepage featured post
+export const getHome = async (language = 'vi') => {
+  const res = await api.get('/api/posts/home', {
+    params: { lang: language }
+  });
+  return res.data; // expected: { id, title, content, ... }
+};
