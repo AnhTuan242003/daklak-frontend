@@ -122,3 +122,8 @@ export const getListVideoMp4 = async ({ page = 0, size = 10 } = {}) => (
 ).data;
 
 export default api;
+// News – add this because frontend is calling getNews()
+export const getNews = async (language = 'vi') => {
+  const res = await api.get('/api/posts', { params: { page: 0, size: 4, language } });
+  return res.data;
+};
