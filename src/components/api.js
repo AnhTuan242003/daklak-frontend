@@ -202,5 +202,15 @@ export const getMe = async () =>
 
 export const updateMe = async (payload) =>
   (await api.put('/api/users/profile', payload)).data;
+// =================================================
+// YOUTUBE PLAYLIST API
+// =================================================
+
+export const getFromU2bePlaylist = async ({ playlistId, page = 0, size = 10 } = {}) => {
+  const res = await api.get('/api/u2be/playlist', {
+    params: { playlistId, page, size }
+  });
+  return res.data;
+};
 
 export default api;
