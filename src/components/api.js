@@ -121,7 +121,7 @@ export const getListVideoMp4 = async ({ page = 0, size = 10 } = {}) => (
   await api.get('/api/videos', { params: { page, size } })
 ).data;
 
-export default api;
+
 export const getHome = async (language = 'vi') => {
   const res = await api.get('/api/posts/home', {
     params: { lang: language }
@@ -144,3 +144,4 @@ export const invalidateImagesCache = async (ethnic) => {
     console.warn('invalidateImagesCache error:', err);
   }
 };
+export default api;
