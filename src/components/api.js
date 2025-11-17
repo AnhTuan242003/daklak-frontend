@@ -168,5 +168,13 @@ export const adminGetUser = async (id) =>
 // =================================================
 // EXPORT DEFAULT — MUST BE LAST
 // =================================================
+export const createPost = async (payload) =>
+  (await api.post('/api/posts', payload)).data;
+
+export const updatePost = async (id, payload) =>
+  (await api.put(`/api/posts/${id}`, payload)).data;
+
+export const deletePost = async (id) =>
+  await api.delete(`/api/posts/${id}`);
 
 export default api;
