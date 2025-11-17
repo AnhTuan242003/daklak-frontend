@@ -176,5 +176,22 @@ export const updatePost = async (id, payload) =>
 
 export const deletePost = async (id) =>
   await api.delete(`/api/posts/${id}`);
+// =================================================
+// CLIPS API
+// =================================================
+
+export const updateClip = async (id, payload) =>
+  (await api.put(`/api/clips/${id}`, payload)).data;
+
+export const deleteClip = async (id) =>
+  await api.delete(`/api/clips/${id}`);
+
+export const fetchClips = async ({ page = 0, size = 10 } = {}) =>
+  (await api.get('/api/clips', { params: { page, size } })).data;
+export const uploadClip = async (file) => {
+  const form = new FormData();
+  form.append("file", file);
+  return (await api.post('/api/clips/upload', form)).data;
+};
 
 export default api;
