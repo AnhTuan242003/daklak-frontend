@@ -193,5 +193,14 @@ export const uploadClip = async (file) => {
   form.append("file", file);
   return (await api.post('/api/clips/upload', form)).data;
 };
+// =================================================
+// USER PROFILE API
+// =================================================
+
+export const getMe = async () =>
+  (await api.get('/api/users/profile')).data;
+
+export const updateMe = async (payload) =>
+  (await api.put('/api/users/profile', payload)).data;
 
 export default api;
