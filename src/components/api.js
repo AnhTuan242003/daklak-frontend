@@ -122,41 +122,16 @@ export const getListVideoMp4 = async ({ page = 0, size = 10 } = {}) => (
 ).data;
 
 export default api;
-// News – add this because frontend is calling getNews()
-export const getNews = async (language = 'vi') => {
-  const res = await api.get('/api/posts', { params: { page: 0, size: 4, language } });
-  return res.data;
-};
-// Home API - fetch homepage featured post
 export const getHome = async (language = 'vi') => {
   const res = await api.get('/api/posts/home', {
     params: { lang: language }
   });
-  return res.data; // expected: { id, title, content, ... }
-};
-// Images cache invalidation
-export const invalidateImagesCache = async (ethnic) => {
-  try {
-    const keyPrefix = `images_${ethnic || ''}`;
-    // Remove all matching localStorage keys
-    Object.keys(localStorage)
-      .filter(k => k.startsWith(keyPrefix))
-      .forEach(k => localStorage.removeItem(k));
-
-    // If your project uses IndexedDB for caching (imagesCache)
-    if (window.imagesCache?.clearByEthnic) {
-      await window.imagesCache.clearByEthnic(ethnic);
-    }
-  } catch (err) {
-    console.warn('Failed to invalidate image cache:', err);
-  }
-};
-export const getHome = async (language = 'vi') => {
-  const res = await api.get('/api/posts/home', { params: { lang: language }});
   return res.data;
 };
 export const getNews = async (language = 'vi') => {
-  const res = await api.get('/api/posts', { params: { page: 0, size: 4, language }});
+  const res = await api.get('/api/posts', {
+    params: { page: 0, size: 4, language }
+  });
   return res.data;
 };
 export const invalidateImagesCache = async (ethnic) => {
@@ -166,6 +141,6 @@ export const invalidateImagesCache = async (ethnic) => {
       .filter(k => k.startsWith(prefix))
       .forEach(k => localStorage.removeItem(k));
   } catch (err) {
-    console.warn('invalidateImagesCache error', err);
+    console.warn('invalidateImagesCache error:', err);
   }
 };
